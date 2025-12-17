@@ -1,0 +1,12 @@
+------- Create a virtial enviroment -------
+python3 -m venv venv
+
+
+------- Activate venv --------
+source venv/bin/activate
+
+------- Install Flask --------
+pip install Flask
+
+------- Run server.py file -------
+python3 server.py
