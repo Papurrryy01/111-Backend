@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import sqlite3
 from datetime import date
 
@@ -199,7 +199,7 @@ def get_expenses():
     expenses = []
     for row in rows:
         expense = {
-            "id": row[0],
+            "id": row[0],  # [] means the position of the column
             "title": row[1],
             "description": row[2],
             "amount": row[3],
@@ -277,14 +277,30 @@ def update_expense(expense_id):
     title = data.get("title")
     user_id = data.get("user_id")
     amount = data.get("amount")
+    date_str = date.today().isoformat()
     description = data.get("description")
     category = data.get("category")
 
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
+    cursor.execute('SELECT * FROM expenses WHERE id = ?', (expense_id,))
+    if not cursor.fetchone():
+        conn.close()
+        return jsonify({
+            "success": False,
+            "message": "Expense not found"
+        }), 404
+
     cursor.execute(
-        'UPDATE expenses SET title = ?, user_id = ?, amount = ?, description = ?, category = ? WHERE id = ?',
-        (title, user_id, amount, description, category, expense_id)
+        '''UPDATE expenses SET 
+        title = ?, 
+        user_id = ?, 
+        amount = ?, 
+        date = ?, 
+        description = ?, 
+        category = ? 
+        WHERE id = ?''',
+        (title, user_id, amount, date_str, description, category, expense_id)
     )
     conn.commit()
     conn.close()
@@ -293,6 +309,36 @@ def update_expense(expense_id):
         "success": True,
         "message": "Expense updated successfully"
         }), 200
+
+
+#Frontend 
+@app.get("/")
+def home():
+    return render_template("home.html")
+
+
+@app.get("/about")
+def about():
+    my_name = "Carlos"
+    hobbies = ["Coocking", "Traveling", "Coding", "Reading", "Driving"]
+    return render_template("about.html", name=my_name, hobbies=hobbies)
+
+
+@app.get("/contact")
+def contact():
+    contact_info = {
+        "email": "carlos@example.com",
+        "phone": "123-456-7890",
+        "address": "123 Main St, Anytown USA"
+    }
+    return render_template("contact.html", contact_info=contact_info)
+
+
+@app.get("/login")
+def login():
+    return render_template("login.html")
+
+
 
 
 if __name__ == "__main__":
