@@ -1,17 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<header class="py-5" style="background-color: #e3963a; color: #fff;">
+    <div class="container">
+        <h1 class="fw-bold mb-3">About My Budget</h1>
+        <p class="lead mb-0">A simple tool to help you see where your money goes—without extra clutter.</p>
+    </div>
+</header>
 
-    <h1>About Us</h1>
-    <h2>Hello, I'm {{name}}</h2>
-    <p>This is the about page of our website. Here you can find more information about us.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti reiciendis harum sint aperiam beatae quas, non ex nam aspernatur, nostrum delectus voluptatibus corporis adipisci quod eligendi enim eaque quo fuga.</p>
+<main class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Our goal</h5>
+                        <p class="card-text">Make expense tracking friendly for beginners: fast to add an expense, clear to read totals, and easy to keep categories consistent.</p>
+                        <ul class="mb-0">
+                            <li>Log expenses with title, amount, date, and category.</li>
+                            <li>Keep notes on purchases so you remember the context.</li>
+                            <li>Review spending trends without complex reports.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">How it helps you</h5>
+                        <p class="card-text">Stay on top of your budget with a few habits:</p>
+                        <ol class="mb-0">
+                            <li>Add expenses the day you spend.</li>
+                            <li>Use consistent categories (Food, Transport, Bills).</li>
+                            <li>Check weekly to spot where to cut back.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <h2>My Hobbies</h2>
-    <ul>
-        {% for hobby in hobbies %}
-            <li>{{ hobby }}</li>
-        {% endfor %}
-    </ul>
-
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-uppercase text-muted">Built with</h6>
+                        <h5 class="card-title">Bootstrap + Flask</h5>
+                        <p class="card-text mb-0">Lightweight, responsive pages and a simple API to store your data.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-uppercase text-muted">Data you track</h6>
+                        <h5 class="card-title">Expenses that matter</h5>
+                        <p class="card-text mb-0">Title, description, amount, date, category, and the user who added it.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-uppercase text-muted">Next steps</h6>
+                        <h5 class="card-title">Get organized</h5>
+                        <p class="card-text mb-3">Start with a few categories and add your last 5 purchases to see a quick picture.</p>
+                        <a class="btn btn-secondary" href="/">Go to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock content %}
